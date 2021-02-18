@@ -2341,7 +2341,41 @@ var _menu2 = _interopRequireDefault(require("./templates/menu.hbs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var menuRef = document.querySelector('.js-menu');
-document.body.innerHTML = (0, _menu2.default)(_menu.default);
+var bodyRef = document.querySelector('body');
+var markup = (0, _menu2.default)(_menu.default);
+var toggle = document.querySelector('#theme-switch-toggle');
+var Theme = {
+  LIGHT: 'light-theme',
+  DARK: 'dark-theme'
+};
+toggle.addEventListener('change', cklickToggle);
+var savedTheme = localStorage.getItem('Theme');
+
+if (savedTheme === Theme.DARK) {
+  bodyRef.classList.add(Theme.DARK);
+  toggle.checked = true;
+}
+
+if (savedTheme === Theme.LIGHT) {
+  bodyRef.classList.add(Theme.LIGHT);
+  toggle.checked = false;
+}
+
+function cklickToggle() {
+  if (toggle.checked) {
+    bodyRef.classList.remove(Theme.LIGHT);
+    bodyRef.classList.add(Theme.DARK);
+    localStorage.setItem('Theme', Theme.DARK);
+  }
+
+  if (!toggle.checked) {
+    bodyRef.classList.remove(Theme.DARK);
+    bodyRef.classList.add(Theme.LIGHT);
+    localStorage.setItem('Theme', Theme.LIGHT);
+  }
+}
+
+menuRef.insertAdjacentHTML('beforeend', markup);
 },{"./menu.json":"menu.json","./templates/menu.hbs":"templates/menu.hbs"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -2370,7 +2404,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
