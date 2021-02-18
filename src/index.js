@@ -34,7 +34,6 @@ function cklickToggle() {
 }
 
 
-
 menuRef.insertAdjacentHTML('beforeend', markup);
 
 
